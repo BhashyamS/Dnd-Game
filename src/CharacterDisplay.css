@@ -5,6 +5,11 @@
     text-align: center;
     padding: 20px;
   }
+
+  .title {
+    color:white;
+    -webkit-text-fill-color: white;
+  }
   
   /* Grid layout for characters */
   .character-grid {
