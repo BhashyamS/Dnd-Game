@@ -52,16 +52,20 @@ function CharacterDisplay() {
 
       {/* Character Grid */}
       <div className="character-grid">
-        {characters.map((character) => (
-          <div
-            key={character.id}
-            className={`character-card ${selectedCharacter?.id === character.id ? 'selected' : ''}`}
-            onClick={() => handleSelectCharacter(character)} // Handle selection
-          >
-            <img src={character.image} alt={character.name} />
-            <p>{character.name}</p>
-          </div>
-        ))}
+        {filteredCharacters.length > 0 ? (
+          filteredCharacters.map((character) => (
+            <div
+              key={character.id}
+              className={`character-card ${selectedCharacter?.id === character.id ? 'selected' : ''}`}
+              onClick={() => handleSelectCharacter(character)} // Handle selection
+            >
+              <img src={character.image} alt={character.name} />
+              <p>{character.name}</p>
+            </div>
+          ))
+        ) : (
+          <p style={{ color: 'white' }}>No characters found</p> // Show a message when no characters match the search
+        )}
       </div>
 
       {/* Show selected character details */}
