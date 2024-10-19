@@ -4,12 +4,14 @@ import './App.css';
 import CharacterDisplay from './CharacterDisplay';
 import GameBoard from './GameBoard';
 import Map from './Map';
+import Header from './Header';
 
 function App() {
   const navigate = useNavigate();
 
   return (
     <div className="App">
+      <Header />
       <header className="App-header">
         <h1>Welcome to the World of Wonder</h1>
         <p>Dungeons and Dragons?</p>
@@ -29,6 +31,8 @@ export default function AppWrapper() {
         <Route path="/CharacterDisplay" element={<CharacterDisplay />} />
         <Route path="/gameboard" element={<GameBoard />} />
         <Route path="/map" element={<Map />} />
+        <Route path="/header" element={<Header />}/>
+        
       </Routes>
     </Router>
   );

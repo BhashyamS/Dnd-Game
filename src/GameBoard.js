@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for routing
 import './GameBoard.css'; // Import the styling
+import Header from './Header';
 
 function GameBoard() {
   const navigate = useNavigate(); // Initialize navigation
-
   const [text, setText] = useState(''); // To store the transcribed text
   const [isRecording, setIsRecording] = useState(false); // To track if recording is in progress
-
+  const [diceRoll, setDiceRoll] = useState(null);
+  
   // Function to handle voice input
   const handleVoiceInput = () => {
     if (!('webkitSpeechRecognition' in window)) {
@@ -44,8 +45,15 @@ function GameBoard() {
     // You can send the `text` to a server, save it, or perform any action here.
   };
 
+    // Function to roll a dice (1-20)
+    const handleDiceRoll = () => {
+      const roll = Math.floor(Math.random() * 20) + 1; // Generate a random number between 1 and 20
+      setDiceRoll(roll); // Store the dice roll result
+    };
+
   return (
     <div className="gameboard-container">
+      <Header />
       {/* Top section: Row of images */}
       <div className="top-section">
         <img src="image1.png" alt="Image 1" />
@@ -57,7 +65,7 @@ function GameBoard() {
           className="map-button"
           onClick={() => navigate('/map')}
         >
-          Go to Map
+          🗺️
         </button>
       </div>
 
@@ -83,26 +91,28 @@ function GameBoard() {
 
         {/* Center section: Prompt and Text Area with Microphone */}
         <div className="prompt-section">
-          <h3>Prompt</h3>
+          <h3>Dungeon Master:</h3>
           <textarea
             placeholder="Type here"
             value={text} // Bind the transcribed text to the textarea
             onChange={(e) => setText(e.target.value)} // Update text on manual input
           ></textarea>
 
-          {/* Microphone Button */}
-          <button
-            className={`mic-button ${isRecording ? 'recording' : ''}`}
-            onClick={handleVoiceInput}
-            disabled={isRecording}
-          >
-            {isRecording ? 'Recording...' : '🎤'} {/* Display mic icon or status */}
-          </button>
+          <div className="button-group">
+                    <button className={`mic-button ${isRecording ? 'recording' : ''}`} onClick={handleVoiceInput} disabled={isRecording}>
+                        {isRecording ? 'Recording...' : '🎤'}
+                    </button>
+                <button className="submit-button" onClick={handleSubmit}>Submit</button>
+            </div>
 
-          {/* Submit Button */}
-          <button className="submit-button" onClick={handleSubmit}>
-            Submit
-          </button>
+                {/* Dice Roll Section */}
+      <div className="dice-roll-section">
+        <button className="dice-button" onClick={handleDiceRoll}>
+          🎲 Roll Dice
+        </button>
+        {diceRoll !== null && <p>You rolled: {diceRoll}</p>} {/* Display dice roll result */}
+      </div>
+
         </div>
       </div>
     </div>
