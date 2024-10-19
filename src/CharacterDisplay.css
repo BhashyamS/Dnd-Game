@@ -1,0 +1,71 @@
+/* CharacterDisplay.css */
+
+/* Center the container and items */
+.character-display-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Grid layout for characters */
+  .character-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Create a grid with 4 columns */
+    gap: 20px; /* Space between the cards */
+    margin-bottom: 30px;
+  }
+  
+  /* Character card styling */
+  .character-card {
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .character-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Highlight the selected card */
+  .character-card.selected {
+    border-color: #61dafb;
+    transform: scale(1.1); /* Make the selected card slightly larger */
+  }
+  
+  /* Character details section */
+  .character-details {
+    border: 2px solid #61dafb;
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  .character-details img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style for the button */
+  .navigate-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: white;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navigate-button:hover {
+    background-color: #21a1f1;
+  }
+  
