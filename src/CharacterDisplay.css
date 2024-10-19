@@ -6,10 +6,26 @@
     padding: 20px;
   }
 
-  .title {
-    color:white;
-    -webkit-text-fill-color: white;
-  }
+.title {
+  color: white; /* Make the title white */
+  font-size: 48px; /* Increase the font size */
+  margin-bottom: 20px; /* Add some spacing below the title */
+}
+
+/* Search bar styling */
+.search-bar {
+  margin-bottom: 20px;
+  text-align: center; /* Center the search bar */
+}
+
+.search-bar input {
+  width: 300px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
   
   /* Grid layout for characters */
   .character-grid {
