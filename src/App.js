@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import './App.css'; 
+import CharacterDisplay from './CharacterDisplay';
+import GameBoard from './GameBoard';
+import Map from './Map';
 
 function App() {
+  const navigate = useNavigate();
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Welcome to the World of Wonder</h1>
+        <p>Dungeons and Dragons?</p>
+        <button className="navigate-button" onClick={() => navigate('/CharacterDisplay')}>
+          Start Game
+        </button>
       </header>
     </div>
   );
 }
 
-export default App;
+export default function AppWrapper() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/CharacterDisplay" element={<CharacterDisplay />} />
+        <Route path="/gameboard" element={<GameBoard />} />
+        <Route path="/map" element={<Map />} />
+      </Routes>
+    </Router>
+  );
+}
