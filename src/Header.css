@@ -1,15 +1,18 @@
 .header {
   display: flex;
   justify-content: space-between; /* Ensures "LoreKroft" is on the left and username is on the right */
-  align-items: center;
+  align-items: Left;
   padding: 10px 20px;
-  background-color: #282c34; /* Dark background for the header */
+  background-color: rgba(68, 34, 8, 0.63); /* Dark background for the header */
   color: white; /* Make text white */
   font-family: Arial, sans-serif;
+  border-radius: 0px;
 }
 
 .logo h1 {
   margin: 0;
   font-size: 24px;
+  padding: 2px;
+  
 }
 

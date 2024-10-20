@@ -32,7 +32,6 @@ export default function AppWrapper() {
         <Route path="/gameboard" element={<GameBoard />} />
         <Route path="/map" element={<Map />} />
         <Route path="/header" element={<Header />}/>
-        
       </Routes>
     </Router>
   );

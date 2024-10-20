@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'; // Import useLocati
 import './GameBoard.css'; 
 import Header from './Header';
 
+
 function GameBoard() {
   const navigate = useNavigate();
   const location = useLocation(); // Get the passed character data
@@ -11,6 +12,7 @@ function GameBoard() {
   const [text, setText] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [diceRoll, setDiceRoll] = useState(null);
+  const [isRolling, setIsRolling] = useState(false);
 
   const handleVoiceInput = () => {
     if (!('webkitSpeechRecognition' in window)) {
@@ -46,8 +48,17 @@ function GameBoard() {
   };
 
   const handleDiceRoll = () => {
-    const roll = Math.floor(Math.random() * 20) + 1;
-    setDiceRoll(roll);
+    setIsRolling(true);
+    const diceElement = document.getElementById('dice');
+    diceElement.style.animation = 'roll 2s ease';
+
+    // Stop animation after 2 seconds and show the result
+    setTimeout(() => {
+      diceElement.style.animation = 'none';
+      const roll = Math.floor(Math.random() * 20) + 1; // Random number between 1 and 20
+      setDiceRoll(roll);
+      setIsRolling(false);
+    }, 2000);
   };
 
   return (
@@ -94,7 +105,10 @@ function GameBoard() {
         </div>
 
         <div className="prompt-section">
-          <h3>Dungeon Master:</h3>
+          <h2 className='Narrator'>Dungeon Master:</h2>
+
+          <div className = "Chat">
+            <h3>Your turn: </h3>
           <textarea
             placeholder="Type here"
             value={text}
@@ -109,10 +123,15 @@ function GameBoard() {
             <button className="submit-button" onClick={handleSubmit}>Submit</button>
 
             <div className="dice-roll-section">
-              <button className="dice-button" onClick={handleDiceRoll}>
-                🎲 Roll Dice
+              <div id="dice" className={`dice ${isRolling ? 'rolling' : ''}`}>
+                {/* Dice faces can be visualized or replaced with a 3D model */}
+                <button className="dice-button" onClick={handleDiceRoll} disabled={isRolling}>
+                {isRolling ? '🎲' : '🎲'}
               </button>
-              {diceRoll !== null && <p>You rolled: {diceRoll}</p>}
+                
+              </div>
+              <p>{diceRoll ? `You rolled: ${diceRoll}` : '🎲'}</p>
+            </div>
             </div>
           </div>
         </div>

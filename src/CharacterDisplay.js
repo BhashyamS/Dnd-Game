@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './CharacterDisplay.css';
+import './CharacterDisplay.css'; // Add styling for background image
 import Header from './Header';
 
 function CharacterDisplay() {
@@ -13,7 +13,7 @@ function CharacterDisplay() {
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
-        const response = await fetch('http://54.67.37.79:8000/test'); // Your external URL here
+        const response = await fetch('http://54.67.37.79:8000/test');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -70,7 +70,9 @@ function CharacterDisplay() {
               className={`character-card ${selectedCharacter?._id.$oid === character._id.$oid ? 'selected' : ''}`}
               onClick={() => handleSelectCharacter(character)}
             >
-              <img src={`path_to_images/${character.image_ids[0]}.png`} alt={character.character_name} />
+            <img
+              src={`http://54.67.37.79:8000/static/src/${character.image_ids[0]}.png`}  
+              alt={character.character_name} />
               <p>{character.character_name}</p>
             </div>
           ))
@@ -81,19 +83,21 @@ function CharacterDisplay() {
 
       {selectedCharacter && (
         <div className="character-details">
-          <h3>{selectedCharacter.character_name}</h3>
-          <p>Strength: {selectedCharacter.Attributes?.Strength || 'N/A'}</p>
-          <p>Agility: {selectedCharacter.Attributes?.Agility || 'N/A'}</p>
-          <p>Magic: {selectedCharacter.Attributes?.Magic || 'N/A'}</p>
-          <p>Physical Defense: {selectedCharacter.Defense?.['Physical Defense'] || 'N/A'}</p>
-          <p>Magical Defense: {selectedCharacter.Defense?.['Magical Defense'] || 'N/A'}</p>
-          {/* More stats can be added as necessary */}
-          <button
-            className="navigate-button"
-            onClick={() => navigate('/gameboard', { state: { selectedCharacter } })}
-          >
-            Go to Game
-          </button>
+          <img src="/public/characterSheet.png" alt="D&D Sheet Background" className="character-background" /> {/* Use the D&D sheet image */}
+          <div className="character-stats">
+            <h3>{selectedCharacter.character_name}</h3>
+            <p>Strength: {selectedCharacter.Attributes?.Strength || 'N/A'}</p>
+            <p>Agility: {selectedCharacter.Attributes?.Agility || 'N/A'}</p>
+            <p>Magic: {selectedCharacter.Attributes?.Magic || 'N/A'}</p>
+            <p>Physical Defense: {selectedCharacter.Defense?.['Physical Defense'] || 'N/A'}</p>
+            <p>Magical Defense: {selectedCharacter.Defense?.['Magical Defense'] || 'N/A'}</p>
+            <button
+              className="navigate-button"
+              onClick={() => navigate('/gameboard', { state: { selectedCharacter } })}
+            >
+              Go to Game
+            </button>
+          </div>
         </div>
       )}
     </div>
