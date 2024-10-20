@@ -102,16 +102,19 @@ function GameBoard() {
                     <button className={`mic-button ${isRecording ? 'recording' : ''}`} onClick={handleVoiceInput} disabled={isRecording}>
                         {isRecording ? 'Recording...' : '🎤'}
                     </button>
-                <button className="submit-button" onClick={handleSubmit}>Submit</button>
+                    
+                    <button className="submit-button" onClick={handleSubmit}>Submit</button>
+                    {/* Dice Roll Section */}
+                    <div className="dice-roll-section">
+                      <button className="dice-button" onClick={handleDiceRoll}>
+                        🎲 Roll Dice
+                      </button>
+                      {diceRoll !== null && <p>You rolled: {diceRoll}</p>} {/* Display dice roll result */}
+                    </div>
+            
             </div>
 
-                {/* Dice Roll Section */}
-      <div className="dice-roll-section">
-        <button className="dice-button" onClick={handleDiceRoll}>
-          🎲 Roll Dice
-        </button>
-        {diceRoll !== null && <p>You rolled: {diceRoll}</p>} {/* Display dice roll result */}
-      </div>
+
 
         </div>
       </div>
