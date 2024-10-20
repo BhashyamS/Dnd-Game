@@ -7,10 +7,9 @@ function CharacterDisplay() {
   const navigate = useNavigate();
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [characters, setCharacters] = useState([]); // Ensure characters is an array by default
+  const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
 
-  // Fetch data from the external API on component load
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
@@ -20,10 +19,8 @@ function CharacterDisplay() {
         }
         const data = await response.json();
 
-        // Check if the fetched data contains an array in the 'data' field
         if (Array.isArray(data.data)) {
-          setCharacters(data.data); // Set the fetched data to the state
-          console.log('Characters:', data.data); // Log the characters to see if they're correctly set
+          setCharacters(data.data);
         } else {
           throw new Error('Fetched data is not an array');
         }
@@ -34,19 +31,18 @@ function CharacterDisplay() {
     };
 
     fetchCharacters();
-  }, []); // The empty array makes sure this runs only once, after the component mounts
+  }, []);
 
   const handleSelectCharacter = (character) => {
-    setSelectedCharacter(character); // Store the selected character's details
+    setSelectedCharacter(character);
   };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  // Filter characters based on the search term
   const filteredCharacters = characters.filter(
-    (character) => 
+    (character) =>
       character.image_ids && character.character_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -72,9 +68,9 @@ function CharacterDisplay() {
             <div
               key={character._id.$oid}
               className={`character-card ${selectedCharacter?._id.$oid === character._id.$oid ? 'selected' : ''}`}
-              onClick={() => handleSelectCharacter(character)} // Handle selection
+              onClick={() => handleSelectCharacter(character)}
             >
-              <img src={`path_to_images/${character.image_ids[0]}.png`} alt={character.character_name} /> {/* Use the first image ID */}
+              <img src={`path_to_images/${character.image_ids[0]}.png`} alt={character.character_name} />
               <p>{character.character_name}</p>
             </div>
           ))
@@ -86,12 +82,18 @@ function CharacterDisplay() {
       {selectedCharacter && (
         <div className="character-details">
           <h3>{selectedCharacter.character_name}</h3>
-          <img src={`path_to_images/${selectedCharacter.image_ids[0]}.png`} alt={selectedCharacter.character_name} />
-          <div>
-          <button className="navigate-button" onClick={() => navigate('/gameboard')}>
+          <p>Strength: {selectedCharacter.Attributes?.Strength || 'N/A'}</p>
+          <p>Agility: {selectedCharacter.Attributes?.Agility || 'N/A'}</p>
+          <p>Magic: {selectedCharacter.Attributes?.Magic || 'N/A'}</p>
+          <p>Physical Defense: {selectedCharacter.Defense?.['Physical Defense'] || 'N/A'}</p>
+          <p>Magical Defense: {selectedCharacter.Defense?.['Magical Defense'] || 'N/A'}</p>
+          {/* More stats can be added as necessary */}
+          <button
+            className="navigate-button"
+            onClick={() => navigate('/gameboard', { state: { selectedCharacter } })}
+          >
             Go to Game
           </button>
-          </div>
         </div>
       )}
     </div>
