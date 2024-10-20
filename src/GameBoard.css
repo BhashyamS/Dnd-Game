@@ -21,6 +21,7 @@ html, body {
     align-items: center; /* Align vertically */
     margin-bottom: 20px;
     background-color: white;
+    border-radius: 10px;
   }
   
   .top-section img {
@@ -107,6 +108,12 @@ html, body {
     margin-bottom: 10px;
   }
   
+  .button-group {
+    display: flex;
+    gap: 10px; /* Space between the buttons */
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center;
+  }
   /* Microphone button */
   .mic-button {
     background-color: #61dafb;
@@ -139,6 +146,15 @@ html, body {
     transition: background-color 0.3s ease;
     margin-right: 10px;
   }
+
+  .dice-roll-section {
+    display: flex;
+    gap: 10px; /* Space between the buttons */
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center;
+
+  }
+  
   
   /* Submit button */
   .submit-button {

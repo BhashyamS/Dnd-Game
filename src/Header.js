@@ -1,12 +1,15 @@
+// src/Header.js
 import React from 'react';
-import './Header.css';
+import './Header.css'; // Make sure you have this CSS file
 
-function Header() {
+const Header = ({ username }) => {
   return (
     <header className="header">
-      <div className="logo">LoreKroft</div>
+      <div className="logo">
+        <h1>LoreKroft</h1>
+      </div>
     </header>
   );
-}
+};
 
 export default Header;
